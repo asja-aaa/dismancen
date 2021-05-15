@@ -1,4 +1,4 @@
-package com.buptse.dismancen.util;
+package com.buptse.dismancen.common.util;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
