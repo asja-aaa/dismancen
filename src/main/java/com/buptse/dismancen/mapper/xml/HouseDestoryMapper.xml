@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buptse.dismancen.mapper.HouseDestoryMapper">
 
+    <insert id="saveAllNoRepeat">
+        insert into house_destory(province, city, country, town, village, category, date, location, basically_intact_square, damaged_square, destroyed_square, note, reporting_unit, earthquake_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.province},#{item.city},#{item.country},#{item.town},#{item.village},#{item.category},#{item.date},#{item.location},#{item.basicallyIntactSquare},#{item.damagedSquare},#{item.destroyedSquare},#{item.note},#{item.reportingUnit},#{item.earthquakeId})
+        </foreach>
+        ON DUPLICATE key update
+        village=values(village),
+        date=values(date),
+        basically_intact_square=values(basically_intact_square),
+        damaged_square=values(damaged_square),
+        destroyed_square=values(destroyed_square)
+
+    </insert>
 </mapper>

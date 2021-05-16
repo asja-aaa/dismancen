@@ -16,14 +16,14 @@ import java.util.List;
  * @Date 2021/5/12 21:59
  * @Version 1.0
  */
-public class JsonUtil {
+public class FileUtil {
 
     /**
      * JSON文件转String
      * @param filePath
      * @return
      */
-    public static String getJsonString(String filePath){
+    public static String getFileString(String filePath){
         String josnStr = "";
         if("".equals(filePath)){
             System.out.println("please input the fileName，like '?filePath=xxx'");

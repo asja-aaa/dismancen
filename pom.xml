@@ -83,6 +83,14 @@
             <version>1.2.75</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.16</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,13 +98,6 @@
             <version>2.4.4</version>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.google.code.gson/gson &ndash;&gt;-->
-<!--        &lt;!&ndash;谷歌开源的一款JSON与JAVA对象互相转换的开源解决方案 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.code.gson</groupId>-->
-<!--            <artifactId>gson</artifactId>-->
-<!--            <version>2.8.6</version>-->
-<!--        </dependency>-->
 
         <!--  文件流      -->
         <dependency>
@@ -118,7 +119,18 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
             </plugins>
+
+            <resources>
+                <resource>
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                    </includes>
+                    <filtering>true</filtering>
+                </resource>
+            </resources>
         </build>
+
 
 
 </project>

@@ -6,6 +6,8 @@ import com.buptse.dismancen.service.ILifeLineService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class LifeLineServiceImpl extends ServiceImpl<LifeLineMapper, LifeLine> implements ILifeLineService {
 
+    @Override
+    public void saveAllNoRepeat(List<LifeLine> list) {
+        getBaseMapper().saveAllNoRepeat(list);
+    }
 }

@@ -6,6 +6,8 @@ import com.buptse.dismancen.mapper.BasicEarthquakeMapper;
 import com.buptse.dismancen.service.IBasicEarthquakeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BasicEarthquakeServiceImpl extends ServiceImpl<BasicEarthquakeMapper, BasicEarthquake> implements IBasicEarthquakeService {
 
+    @Override
+    public void saveAllNoRepeat(List<BasicEarthquake> list) {
+        getBaseMapper().saveAllNoRepeat(list);
+    }
 }

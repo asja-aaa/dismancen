@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buptse.dismancen.mapper.PeoLossMapper">
 
+    <insert id="saveAllNoRepeat">
+        insert into peo_loss(province, city, country, town, village, category, date, location, number, reporting_unit, earthquake_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.province},#{item.city},#{item.country},#{item.town},#{item.village},#{item.category},#{item.date},#{item.location},#{item.number},#{item.reportingUnit},#{item.earthquakeId})
+        </foreach>
+        ON DUPLICATE key update
+        village=values(village),
+        date=values(date),
+        number=values(number)
+    </insert>
 </mapper>

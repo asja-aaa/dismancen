@@ -6,6 +6,8 @@ import com.buptse.dismancen.service.ISecDisasterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecDisasterServiceImpl extends ServiceImpl<SecDisasterMapper, SecDisaster> implements ISecDisasterService {
 
+    @Override
+    public void saveAllNoRepeat(List<SecDisaster> list) {
+        getBaseMapper().saveAllNoRepeat(list);
+    }
 }

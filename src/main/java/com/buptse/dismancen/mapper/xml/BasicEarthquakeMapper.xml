@@ -2,5 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buptse.dismancen.mapper.BasicEarthquakeMapper">
 
+    <insert id="saveAllNoRepeat">
+        insert into basic_earthquake(province, city, country, town, village, category, date, location, longitude, latitude, depth, magnitude, reporting_unit, picture)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.province},#{item.city},#{item.country},#{item.town},#{item.village},#{item.category},#{item.date},#{item.location},#{item.longitude},
+            #{item.latitude},#{item.depth},#{item.magnitude},#{item.reportingUnit},#{item.picture})
+        </foreach>
+        ON DUPLICATE key update
+        date = values(date),
+        longitude=values(longitude),
+        latitude=values(latitude)
+
+    </insert>
 </mapper>
 

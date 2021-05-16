@@ -6,6 +6,8 @@ import com.buptse.dismancen.service.IHouseDestoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HouseDestoryServiceImpl extends ServiceImpl<HouseDestoryMapper, HouseDestory> implements IHouseDestoryService {
 
+    @Override
+    public void saveAllNoRepeat(List<HouseDestory> list) {
+        getBaseMapper().saveAllNoRepeat(list);
+    }
 }

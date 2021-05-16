@@ -11,3 +11,7 @@ spring:
     username: jlmnb
     password: 123456
 
+mybatis-plus:
+  mapper-locations: classpath*:com/buptse/dismancen/mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
