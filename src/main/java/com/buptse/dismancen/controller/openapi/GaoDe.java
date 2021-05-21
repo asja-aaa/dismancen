@@ -1,5 +1,6 @@
 package com.buptse.dismancen.controller.openapi;
 
+import com.buptse.dismancen.common.dto.MapVDto;
 import com.buptse.dismancen.entity.BasicEarthquake;
 import com.buptse.dismancen.service.IBasicEarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class GaoDe {
     private IBasicEarthquakeService service;
 
     @GetMapping("/jsonp")
-    public Map<String,List<MapV>> basicEarthquakeMapv(){
-        Map<String, List<BasicEarthquake>> map = new HashMap<>();
-        map.put("data",service.list());
+    public Map<String,List<MapVDto>> basicEarthquakeMapv(){
+        Map<String, List<MapVDto>> map = new HashMap<>();
+        map.put("data",MapVDto.mapVDtoList(service.list()));
         return map;
     }
 }

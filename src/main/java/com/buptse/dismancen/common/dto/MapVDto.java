@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,22 @@ import java.util.List;
 @Builder
 public class MapVDto {
     private String lnglat;
-    BasicEarthquake basicEarthquake;
+
+    private Integer depth;
+
+    private Float magnitude;
+
+    private String reportingUnit;
+
+    private LocalDateTime date;
 
     public MapVDto(BasicEarthquake basicEarthquake){
-        this.basicEarthquake = basicEarthquake;
+
         this.lnglat =String.valueOf(basicEarthquake.getLongitude()) + ","+ String.valueOf(basicEarthquake.getLatitude());
+        this.depth = basicEarthquake.getDepth();
+        this.magnitude = basicEarthquake.getMagnitude();
+        this.reportingUnit = basicEarthquake.getReportingUnit();
+        this.date = basicEarthquake.getDate();
     }
 
     public static List<MapVDto> mapVDtoList(List<BasicEarthquake> basicEarthquakeList){
