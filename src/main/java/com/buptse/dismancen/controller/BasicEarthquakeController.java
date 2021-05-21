@@ -1,6 +1,5 @@
 package com.buptse.dismancen.controller;
 
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.buptse.dismancen.common.CommonResult;
@@ -15,6 +14,7 @@ import com.thoughtworks.xstream.XStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,7 +45,6 @@ public class BasicEarthquakeController {
     @GetMapping("/inputlocalfile")
     public @ResponseBody
     String fileInputBasicEarthquake(@RequestParam String filePath) {
-
         int index = filePath.indexOf(".");
         String Str = FileUtil.getFileString(filePath);
         if(DATA_TYPE.JSON.getType().contains(filePath.substring(index+1))) {
