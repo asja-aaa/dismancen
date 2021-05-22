@@ -9,11 +9,14 @@ import com.buptse.dismancen.common.constant.RESULT;
 import com.buptse.dismancen.common.dto.DisasterInfo;
 import com.buptse.dismancen.common.dto.FileDto;
 import com.buptse.dismancen.common.util.FileUtil;
+import com.buptse.dismancen.entity.BasicEarthquake;
 import com.buptse.dismancen.entity.HouseDestory;
 import com.buptse.dismancen.service.IHouseDestoryService;
 import com.thoughtworks.xstream.XStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -76,6 +79,39 @@ public class HouseDestoryController {
         }
 
         return JSON.toJSONString(CommonResult.failFast(RESULT.SUCCESS));
+
+    }
+
+    @GetMapping("/outputlocalfile")
+    public @ResponseBody
+    CommonResult fileOutputBasicEqrthquake(@RequestParam String filePath){
+        List<HouseDestory> houseDestoryList = service.list();
+        DisasterInfo<HouseDestory> disasterInfo = new DisasterInfo<>(houseDestoryList);
+        FileDto<HouseDestory> fileDto = new FileDto<>(disasterInfo);
+
+        int index = filePath.indexOf(".");
+
+        if(DATA_TYPE.JSON.getType().contains(filePath.substring(index+1))){
+            String strJson = JSON.toJSONString(fileDto);
+            if(!FileUtil.writeStringToFile(filePath,strJson)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+
+        }else if(DATA_TYPE.XML.getType().contains(filePath.substring(index+1))){
+            XStream xstream = new XStream();
+            xstream .processAnnotations( new Class[] { DisasterInfo.class ,HouseDestory.class });
+            xstream.autodetectAnnotations(true);
+            xstream.aliasSystemAttribute(null, "class"); // 去掉 class 属性
+            String strXml = xstream.toXML(fileDto.getDisasterInfo());
+
+            if(!FileUtil.writeStringToFile(filePath,strXml)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+        }else{
+            return CommonResult.failFast(RESULT.FILE_TYPE_ERROR);
+        }
+
+        return CommonResult.failFast(RESULT.SUCCESS);
 
     }
 

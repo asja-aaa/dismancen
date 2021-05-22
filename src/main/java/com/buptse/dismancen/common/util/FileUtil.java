@@ -7,6 +7,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -37,6 +39,17 @@ public class FileUtil {
             e.printStackTrace();
         }
         return  josnStr;
+    }
+
+    public static boolean writeStringToFile(String filePath,String str){
+        boolean res =  true;
+        try {
+            FileUtils.writeStringToFile(new File(filePath),str, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            res = false;
+            e.printStackTrace();
+        }
+        return res;
     }
 
 

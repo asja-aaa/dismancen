@@ -1,6 +1,7 @@
 package com.buptse.dismancen.common.dto;
 
 import com.buptse.dismancen.entity.BasicEarthquake;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.*;
 import lombok.experimental.Accessors;
 

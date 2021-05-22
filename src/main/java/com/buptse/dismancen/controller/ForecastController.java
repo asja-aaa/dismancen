@@ -15,6 +15,8 @@ import com.thoughtworks.xstream.XStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -77,6 +79,39 @@ public class ForecastController {
         }
 
         return JSON.toJSONString(CommonResult.failFast(RESULT.SUCCESS));
+
+    }
+
+    @GetMapping("/outputlocalfile")
+    public @ResponseBody
+    CommonResult fileOutputBasicEqrthquake(@RequestParam String filePath){
+        List<Forecast> forecastList = service.list();
+        DisasterInfo<Forecast> disasterInfo = new DisasterInfo<>(forecastList);
+        FileDto<Forecast> fileDto = new FileDto<>(disasterInfo);
+
+        int index = filePath.indexOf(".");
+
+        if(DATA_TYPE.JSON.getType().contains(filePath.substring(index+1))){
+            String strJson = JSON.toJSONString(fileDto);
+            if(!FileUtil.writeStringToFile(filePath,strJson)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+
+        }else if(DATA_TYPE.XML.getType().contains(filePath.substring(index+1))){
+            XStream xstream = new XStream();
+            xstream .processAnnotations( new Class[] { DisasterInfo.class ,Forecast.class });
+            xstream.autodetectAnnotations(true);
+            xstream.aliasSystemAttribute(null, "class"); // 去掉 class 属性
+            String strXml = xstream.toXML(fileDto.getDisasterInfo());
+
+            if(!FileUtil.writeStringToFile(filePath,strXml)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+        }else{
+            return CommonResult.failFast(RESULT.FILE_TYPE_ERROR);
+        }
+
+        return CommonResult.failFast(RESULT.SUCCESS);
 
     }
 

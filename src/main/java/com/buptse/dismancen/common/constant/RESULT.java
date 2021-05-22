@@ -14,7 +14,8 @@ public enum RESULT {
     FILE_PATH_ERROR(-1,"file path or name error"),
     SAVE_OR_UPDATE_ERROR(-2,"database input error"),
     FILE_TYPE_ERROR(-3,"file type is not supported now"),
-    FILE_CONVERT_TO_OBJECT_ERROR(-4,"file convert error");
+    FILE_CONVERT_TO_OBJECT_ERROR(-4,"file convert error"),
+    FILE_OUTPUT_ERROR(-5,"file out put error");
 
     private Integer errorCode;
     private String msg;

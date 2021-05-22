@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.XStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,6 +91,39 @@ public class BasicEarthquakeController {
 
     }
 
+
+    @GetMapping("/outputlocalfile")
+    public @ResponseBody
+    CommonResult fileOutputBasicEqrthquake(@RequestParam String filePath){
+        List<BasicEarthquake> basicEarthquakeList = service.list();
+        DisasterInfo<BasicEarthquake> disasterInfo = new DisasterInfo<>(basicEarthquakeList);
+        FileDto<BasicEarthquake> fileDto = new FileDto<>(disasterInfo);
+
+        int index = filePath.indexOf(".");
+
+        if(DATA_TYPE.JSON.getType().contains(filePath.substring(index+1))){
+            String strJson = JSON.toJSONString(fileDto);
+            if(!FileUtil.writeStringToFile(filePath,strJson)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+
+        }else if(DATA_TYPE.XML.getType().contains(filePath.substring(index+1))){
+            XStream xstream = new XStream();
+            xstream .processAnnotations( new Class[] { DisasterInfo.class ,BasicEarthquake.class });
+            xstream.autodetectAnnotations(true);
+            xstream.aliasSystemAttribute(null, "class"); // 去掉 class 属性
+            String strXml = xstream.toXML(fileDto.getDisasterInfo());
+
+            if(!FileUtil.writeStringToFile(filePath,strXml)){
+                return CommonResult.failFast(RESULT.FILE_OUTPUT_ERROR);
+            }
+        }else{
+            return CommonResult.failFast(RESULT.FILE_TYPE_ERROR);
+        }
+
+        return CommonResult.failFast(RESULT.SUCCESS);
+
+    }
 
 
 
