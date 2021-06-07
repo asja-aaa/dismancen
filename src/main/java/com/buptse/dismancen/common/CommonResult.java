@@ -22,7 +22,7 @@ public class CommonResult {
     private String msg;
 
     /**
-     *  快速返回
+     *  快速返回相关信息
      * @param result
      * @return
      */
@@ -31,7 +31,7 @@ public class CommonResult {
     }
 
     /**
-     * 快速返回
+     * 快速返回相关信息
      * @param errorCode
      * @param msg
      * @return
