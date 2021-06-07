@@ -58,7 +58,7 @@ public class LifeLine implements Serializable {
 
     private String note;
 
-    private String reportUnit;
+    private String reportingUnit;
 
     private String earthquakeId;
 
