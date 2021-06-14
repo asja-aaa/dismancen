@@ -32,6 +32,7 @@ public class GaoDe {
     public Map<String,List<MapVDto>> basicEarthquakeMapv(){
         Map<String, List<MapVDto>> map = new HashMap<>();
         map.put("data",MapVDto.mapVDtoList(service.list()));
+        System.out.println(map);
         return map;
     }
 }
