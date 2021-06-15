@@ -8,6 +8,6 @@ url: http://124.70.47.227:7001//x/y
 - 参数：filePath :导入导出路径
 
 url示例：http://124.70.47.227:7001//basic-earthquake/inputputlocalfile?filePath=xxx.json
-               http://124.70.47.227:7001//basic-earthquake/outputlocalfile?filePath=xxx.xml
+        http://124.70.47.227:7001//basic-earthquake/outputlocalfile?filePath=xxx.xml
 **注**：路径需要转义
 	
