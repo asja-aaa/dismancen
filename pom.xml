@@ -39,11 +39,11 @@
             <version>3.3.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.30</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.freemarker</groupId>-->
+<!--            <artifactId>freemarker</artifactId>-->
+<!--            <version>2.3.30</version>-->
+<!--        </dependency>-->
 
         <!--实体类生成器-->
         <dependency>
@@ -138,7 +138,5 @@
                 </resource>
             </resources>
         </build>
-
-
 
 </project>
